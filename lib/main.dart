@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:provider_api_call_example/pages/home_page.dart';
+import 'package:provider_api_call_example/provider/todo_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,12 +10,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider(
+      create: (context) => ToDoProvider(),
+      child: const MaterialApp(
+        home: HomePage(),
       ),
-      home: HomePage(),
     );
   }
 }
