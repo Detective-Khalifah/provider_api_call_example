@@ -18,7 +18,28 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Consumer<ToDoProvider>(
         builder: (context, value, child) {
-          return const Text("Consumer");
+          if (value.isLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final todos = value.todos;
+          return ListView.builder(
+              itemCount: todos.length,
+              itemBuilder: (context, index) {
+                final todo = todos[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    child: Text(todo.id.toString()),
+                  ),
+                  title: Text(
+                    todo.title,
+                    style: TextStyle(
+                      color: todo.completed ? Colors.grey : Colors.black,
+                    ),
+                  ),
+                );
+              });
         },
       ),
     );
